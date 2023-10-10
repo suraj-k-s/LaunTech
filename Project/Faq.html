@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>LaunTech Laundry Service</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="Assets/Files/Logo/favicon.ico">
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="Assets/Templates/Main/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="Assets/Templates/Main/css/style.css" rel="stylesheet">
+    <style>
+        /* Add a border to all squares with the class 'bg-light' */
+        .bg-light {
+            border: 2px solid #4fc5e6; /* You can adjust the border width and color as needed */
+            border-radius: 15px;
+            padding: 20px; /* Add padding for spacing */
+            margin: 20px 0; /* Add margin for spacing */
+        }
+
+        /* Style for the video toggler */
+        .video-toggler {
+            display: inline-block;
+            margin-left: 10px;
+            position: relative;
+        }
+
+        /* Style for the video */
+        .video-toggler video {
+            width: 30px;
+            height: 30px;
+        }
+
+        /* Style for the play button (overlay) */
+        .video-toggler::before {
+            content: "\f04b"; /* FontAwesome play icon */
+            font-family: FontAwesome;
+            font-size: 30px;
+            color: #fff;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(0, 0, 0, 0.5);
+            cursor: pointer;
+            border-radius: 50%;
+        }
+
+        /* Hide the video player initially */
+        .video-toggler video {
+            display: none;
+        }
+
+        /* Style for the FAQ boxes */
+        .faq-box {
+            border: 2px solid #4fc5e6;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        /* Additional styling for question (dt) elements */
+        .faq-box dt {
+            font-weight: bold;
+        }
+
+        /* Create a grid-like layout */
+        .faq-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* Adjust the number of columns as needed */
+            gap: 20px; /* Adjust the gap between columns */
+        }
+       
+    /* Style for bold table header text */
+    th {
+        font-weight: bold;
+    }
+    </style>
+</head>
+
+<body>
+    <!-- Topbar Start -->
+    <div class="container-fluid bg-primary py-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 text-center text-lg-left mb-2 mb-lg-0">
+                    <div class="d-inline-flex align-items-center">
+                        <a class="text-white pr-3" href="Faq.html">FAQs</a>
+                        <span class="text-white">|</span>
+                        <a class="text-white px-3" href="help.html">Help</a>
+                        <span class="text-white">|</span>
+                        <a class="text-white pl-3" href="support.html">Support</a>
+                    </div>
+                </div>
+                <div class="col-md-6 text-center text-lg-right">
+                    <div class="d-inline-flex align-items-center">
+                        <a class="text-white px-3" href="">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a class="text-white px-3" href="">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a class="text-white px-3" href="">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a class="text-white px-3" href="">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a class="text-white pl-3" href="">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Topbar End -->
+    <!-- Navbar Start -->
+    <div class="container-fluid position-relative nav-bar p-0">
+        <div class="container-lg position-relative p-0 px-lg-3" style="z-index: 9;">
+            <nav class="navbar navbar-expand-lg bg-white navbar-light py-3 py-lg-0 pl-3 pl-lg-5">
+                <!-- Logo -->
+                <video autoplay muted width="300" height="100">
+                    <source src="../Project/Assets/Files/Logo/Laun.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <div class="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">
+                    <!-- Navigation Links -->
+                    <div class="navbar-nav ml-auto py-0">
+                        <a href="index.html" class="nav-item nav-link">Home</a>
+                        <a href="branch.html" class="nav-item nav-link">Branchs</a>
+                        <a href="service.html" class="nav-item nav-link">Services</a>
+                        <a href="package.html" class="nav-item nav-link">Packages</a>
+                        <a href="contact.html" class="nav-item nav-link">Contact</a>
+                        <a href="Guest/Login.php" class="nav-item nav-link">Login</a>
+                    </div>
+                    <!-- Navigation Links -->
+                </div>
+            </nav>
+        </div>
+    </div>
+    <!-- Navbar End -->
+    <header>
+        <h1>Frequently Asked Questions (FAQ)</h1>
+    </header>
+
+    <table>
+        <tr>
+            <th><strong>Section</strong></th>
+            <th><strong>Questions</strong></th>
+            <th><strong>Answers</strong></th>
+        </tr>
+        <tr>
+            <td rowspan="2" bgcolor="darkblue" style="color: rgb(255, 255, 255); border: 5px solid white;">General Questions</td>
+            <td bgcolor="darkblue" style="color: white; border: 3px solid rgb(255, 255, 253);">What is LaunTech?</td>
+            <td bgcolor="darkblue" style="color: white; border: 3px solid rgb(255, 255, 255);">LaunTech is a comprehensive laundry management solution that provides tools and expertise to optimize laundry operations for businesses and individuals. We offer a range of services, including laundry management software, consulting, and training.</td>
+        </tr>
+        
+        <tr>
+            <td bgcolor="darkblue" style="color: white; border: 3px solid rgb(255, 255, 255);"> Who can benefit from your services?</td>
+            <td bgcolor="darkblue" style="color: white; border: 3px solid rgb(255, 255, 255);"> Our services are designed to benefit a wide range of clients, including commercial laundry businesses, hotels, spas, healthcare facilities, and individuals looking to manage their personal laundry more efficiently.</td>
+        </tr>
+        <tr>
+            <td rowspan="2" bgcolor="skyblue" style="color: rgb(255, 255, 255);border: 5px solid white;">Laundry Management Software</td>
+            <td bgcolor="skyblue" style="color: rgb(255, 255, 255); border: 3px solid rgb(255, 255, 255);"> What is laundry management software, and how can it help my business?</td>
+            <td bgcolor="skyblue" style="color: rgb(255, 255, 255); border: 3px solid rgb(255, 255, 255);"> Laundry management software is a powerful tool that streamlines laundry operations by assisting with tasks such as inventory tracking, scheduling, reporting, and customer management. It can save time, reduce costs, and improve overall efficiency.</td>
+        </tr>
+        <tr>
+            <td bgcolor="skyblue" style="color: rgb(255, 255, 255); border: 3px solid rgb(255, 255, 255);" > Is your software customizable to my specific needs?</td>
+            <td bgcolor="skyblue" style="color: rgb(255, 255, 255); border: 3px solid rgb(255, 255, 255);"> Yes, our software is highly customizable. We can tailor it to meet your unique requirements, whether you need a comprehensive laundry management system or specific features to enhance your operations.</td>
+        </tr>
+       
+        <tr>
+            <td rowspan="2" bgcolor="darkblue" style="color: rgb(255, 255, 255); border: 5px solid rgb(255, 255, 255);">Contact Us</td>
+            <td bgcolor="darkblue" style="color: white; border: 3px solid rgb(255, 255, 255);"> How can I reach your customer support team?</td>
+            <td bgcolor="darkblue" style="color: white; border: 3px solid rgb(255, 255, 255);"> You can reach our customer support team by [insert contact information here], and we'll be happy to assist you with any inquiries or issues.</td>
+        </tr>
+        <tr>
+            <td bgcolor="darkblue" style="color: white; border: 3px solid rgb(255, 255, 255);"> Can I schedule a demonstration or request more information about your services?</td>
+            <td bgcolor="darkblue" style="color: white; border: 3px solid rgb(255, 255, 255);"> Certainly! We encourage you to schedule a demonstration or request more information by contacting us. We'll be glad to show you how LaunTech can benefit your laundry management needs.</td>
+        </tr>
+    </table>
+
+
+    <!-- Footer Start -->
+    <div class="container-fluid bg-primary text-white mt-5 pt-5 px-sm-3 px-md-5">
+        <div class="row pt-5">
+            <div class="col-lg-3 col-md-6 mb-5">
+                <a href="index.html"><video autoplay loop muted  width="300" height="100">
+                    <source src="../Project/Assets/Files/Logo/LaunFooter.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video></a>
+                <p>Ready to transform your laundry management experience? Contact us today..</p>
+                <div class="d-flex justify-content-start mt-4">
+                    <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0" style="width: 38px; height: 38px;" href="#"><i class="fab fa-twitter"></i></a>
+                    <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0" style="width: 38px; height: 38px;" href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0" style="width: 38px; height: 38px;" href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0" style="width: 38px; height: 38px;" href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-5">
+                <h4 class="text-white mb-4">Get In Touch</h4>
+                <p>LaunTech can make a difference for your business or personal laundry needs</p>
+                <p><i class="fa fa-map-marker-alt mr-2"></i>123 Street, New York, USA</p>
+                <p><i class="fa fa-phone-alt mr-2"></i>+012 345 67890</p>
+                <p><i class="fa fa-envelope mr-2"></i>info@example.com</p>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-5">
+                <h4 class="text-white mb-4">Quick Links</h4>
+                <div class="d-flex flex-column justify-content-start">
+                    <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Home</a>
+                    <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>About Us</a>
+                    <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Services</a>
+                    <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Pricing</a>
+                    <a class="text-white" href="Guest/Login.php"><i class="fa fa-angle-right mr-2"></i>Login</a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-5">
+                <h4 class="text-white mb-4">Newsletter</h4>
+                <form action="">
+                    <div class="form-group">
+                        <input type="text" class="form-control border-0" placeholder="Your Name" required="required" />
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="form-control border-0" placeholder="Your Email" required="required" />
+                    </div>
+                    <div>
+                        <button class="btn btn-lg btn-secondary btn-block border-0" type="submit">Submit Now</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid bg-dark text-white py-4 px-sm-3 px-md-5">
+        <p class="m-0 text-center text-white">
+            &copy; <a class="text-white font-weight-medium" href="#">LaunTech</a>. All Rights Reserved. 
+			
+			<!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
+			Designed by Adarsh & Adhithyakiran BCA 21
+        </p>
+    </div>
+    <!-- Footer End -->
+</body>
+
+</html>

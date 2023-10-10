@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="Assets/Files/Logo/favicon.ico">
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="Assets/Templates/Main/https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;800&display=swap" rel="stylesheet"> 
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="Assets/Templates/Main/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="Assets/Templates/Main/css/style.css" rel="stylesheet">
+<style>/* Chat container styles */
+    .chat-container {
+        width: 300px;
+        margin: 0 auto;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+    }
+    
+    /* Chat header styles */
+    .chat-header {
+        background-color: #4fc5e6;
+        color: white;
+        padding: 10px;
+        text-align: center;
+    }
+    
+    /* Chat log styles */
+    .chat-log {
+        padding: 10px;
+        max-height: 300px;
+        overflow-y: auto;
+    }
+    
+    /* Chat input styles */
+    .chat-input {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+        background-color: #f0f0f0;
+    }
+    
+    input[type="text"] {
+        flex: 1;
+        border: none;
+        padding: 5px;
+        border-radius: 5px;
+    }
+    
+    button {
+        background-color: #4fc5e6;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 5px 10px;
+        cursor: pointer;
+    }
+    
+    /* User and chatbot message styles */
+    .user {
+        background-color: #e0f0f0;
+        padding: 5px;
+        margin: 5px;
+        border-radius: 5px;
+    }
+    
+    .chatbot {
+        background-color: #4fc5e6;
+        color: white;
+        padding: 5px;
+        margin: 5px;
+        border-radius: 5px;
+    }
+    </style>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+    <body>
+        <!-- Topbar Start -->
+        <div class="container-fluid bg-primary py-3">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 text-center text-lg-left mb-2 mb-lg-0">
+                        <div class="d-inline-flex align-items-center">
+                            <a class="text-white pr-3" href="Faq.html">FAQs</a>
+                            <span class="text-white">|</span>
+                            <a class="text-white px-3" href="chatbot.html">Help</a>
+                            <span class="text-white">|</span>
+                            <a class="text-white pl-3" href="">Support</a>
+                        </div>
+                    </div>
+                    <div class="col-md-6 text-center text-lg-right">
+                        <div class="d-inline-flex align-items-center">
+                            <a class="text-white px-3" href="">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a class="text-white px-3" href="">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a class="text-white px-3" href="">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a class="text-white px-3" href="">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a class="text-white pl-3" href="">
+                                <i class="fab fa-youtube"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        <!-- Topbar End -->
+        <!-- Navbar Start -->
+        <div class="container-fluid position-relative nav-bar p-0">
+            <div class="container-lg position-relative p-0 px-lg-3" style="z-index: 9;">
+                <nav class="navbar navbar-expand-lg bg-white navbar-light py-3 py-lg-0 pl-3 pl-lg-5">
+                     <!-- Logo -->
+                     <video autoplay muted  width="300" height="100">
+                        <source src="../Project/Assets/Files/Logo/Laun.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">
+                        <!-- Navigation Links -->
+                        <div class="navbar-nav ml-auto py-0">
+                            <a href="index.html" class="nav-item nav-link">Home</a>
+                            <a href="branch.html" class="nav-item nav-link">Branchs</a>
+                            <a href="service.html" class="nav-item nav-link">Services</a>
+                            <a href="package.html" class="nav-item nav-link">Packages</a>
+                            <a href="contact.html" class="nav-item nav-link">Contact</a>
+                            <a href="Guest/Login.php" class="nav-item nav-link">Login</a>
+                        </div>
+                        <!-- Navigation Links -->
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <!-- Navbar End -->
+    <div class="chat-container">
+        <div class="chat-header">
+            <h2>Chatbot</h2>
+        </div>
+        <div class="chat-log" id="chat-log">
+            <p>Welcome! How can I assist you today?</p>
+        </div>
+        <div class="chat-input">
+            <input type="text" id="user-input" placeholder="Type your message...">
+            <button id="send-button">Send</button>
+        </div>
+    </div><!-- Footer Start -->
+    <div class="container-fluid bg-primary text-white mt-5 pt-5 px-sm-3 px-md-5">
+        <div class="row pt-5">
+            <div class="col-lg-3 col-md-6 mb-5">
+                <a href="index.html"><video autoplay loop muted  width="300" height="100">
+                    <source src="../Project/Assets/Files/Logo/LaunFooter.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video></a>
+                <p>Ready to transform your laundry management experience? Contact us today..</p>
+                <div class="d-flex justify-content-start mt-4">
+                    <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0" style="width: 38px; height: 38px;" href="#"><i class="fab fa-twitter"></i></a>
+                    <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0" style="width: 38px; height: 38px;" href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0" style="width: 38px; height: 38px;" href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0" style="width: 38px; height: 38px;" href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-5">
+                <h4 class="text-white mb-4">Get In Touch</h4>
+                <p>LaunTech can make a difference for your business or personal laundry needs</p>
+                <p><i class="fa fa-map-marker-alt mr-2"></i>123 Street, New York, USA</p>
+                <p><i class="fa fa-phone-alt mr-2"></i>+012 345 67890</p>
+                <p><i class="fa fa-envelope mr-2"></i>info@example.com</p>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-5">
+                <h4 class="text-white mb-4">Quick Links</h4>
+                <div class="d-flex flex-column justify-content-start">
+                    <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Home</a>
+                    <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>About Us</a>
+                    <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Services</a>
+                    <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Pricing</a>
+                    <a class="text-white" href="Guest/Login.php"><i class="fa fa-angle-right mr-2"></i>Login</a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-5">
+                <h4 class="text-white mb-4">Newsletter</h4>
+                <form action="">
+                    <div class="form-group">
+                        <input type="text" class="form-control border-0" placeholder="Your Name" required="required" />
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="form-control border-0" placeholder="Your Email" required="required" />
+                    </div>
+                    <div>
+                        <button class="btn btn-lg btn-secondary btn-block border-0" type="submit">Submit Now</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid bg-dark text-white py-4 px-sm-3 px-md-5">
+        <p class="m-0 text-center text-white">
+            &copy; <a class="text-white font-weight-medium" href="#">LaunTech</a>. All Rights Reserved. 
+			
+			<!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
+			Designed by Adarsh & Adhithyakiran BCA 21
+        </p>
+    </div>
+    <!-- Footer End -->
+
+    <script>// Get DOM elements
+        const chatLog = document.getElementById('chat-log');
+        const userInput = document.getElementById('user-input');
+        const sendButton = document.getElementById('send-button');
+        
+        // Responses from the chatbot
+        const chatbotResponses = [
+            'Hello! How can I help you today?',
+            'What can I assist you with?',
+            'Please describe your issue, and I\'ll do my best to help.',
+            'Is there anything else you\'d like to know?'
+        ];
+        
+        // Function to add a message to the chat log
+        function addMessage(message, sender) {
+            const messageElement = document.createElement('div');
+            messageElement.classList.add(sender);
+            messageElement.innerText = message;
+            chatLog.appendChild(messageElement);
+            chatLog.scrollTop = chatLog.scrollHeight;
+        }
+        
+        // Function to handle user input
+        function handleUserInput() {
+            const userMessage = userInput.value;
+            if (userMessage.trim() === '') return;
+        
+            addMessage(userMessage, 'user');
+            userInput.value = '';
+        
+            // Simulate chatbot response (you can replace this with actual logic)
+            const randomResponse = chatbotResponses[Math.floor(Math.random() * chatbotResponses.length)];
+            setTimeout(() => {
+                addMessage(randomResponse, 'chatbot');
+            }, 1000);
+        }
+        
+        // Event listener for the Send button
+        sendButton.addEventListener('click', handleUserInput);
+        
+        // Event listener for Enter key in input field
+        userInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                handleUserInput();
+            }
+        });
+        
+        // Initial greeting from chatbot
+        setTimeout(() => {
+            addMessage(chatbotResponses[0], 'chatbot');
+        }, 1000);
+        </script>
+</body>
+
+</html>

@@ -1,0 +1,188 @@
+<?php
+include("../Assets/Connection/Connection.php");
+session_start();
+ob_start();
+include('Head.php');
+
+
+if(isset($_POST["btn_save"]))
+{
+	$subcat=$_POST['sl_subcategory'];
+	$cloth=$_POST['txt_clothcount'];
+	$chekpkg="select * from tbl_packagebooking where user_id=".$_SESSION['uid']." and existing_count!=0";
+	$resCheck=$con->query($chekpkg);
+	if($dataChek=$resCheck->fetch_assoc())
+	{
+		$selPack="select * from tbl_packagebooking where packagebooking_id=".$resCheck['package_id'];
+		$resPack=$con->query($selPack);
+		$dataPack=$resPack->fetch_assoc();
+		$discount=$dataPack['package_percentage'];
+		$insBooking="insert into tbl_booking (user_id, packagebooking_id, booking_date) values(".$_SESSION['uid'].", ".$dataChek['packagebooking_id'].",curdate())" ;
+		if($con->query($insBooking))
+		{
+			$selBooking="select max(booking_id) as id from tbl_booking where user_id=".$_SESSION['uid'];
+			$resBooking=query($selBooking);
+			$dataBooking=$resBooking->fetch_assoc();
+			$bookingid=$dataBooking['booking_id'];
+				$selSubcat="select * from tbl_subcategory where subcategory_id=".$subcat;
+				$ressubCat=$con->query($selSubcat);
+				$dataSubcat=$ressubCat->fetch_assoc();
+			if($cloth<=$dataChek['existing_count'])
+			{
+				$amount=$cloth*$dataSubcat['subcategory_price'];
+				$totalAmount=$amount - ($amount*$discount);
+				$insQry="insert into tbl_cloth(cloth_quantity,cloth_amount,subcategory_id,booking_id) values('".$cloth."','".$totalAmount."','".$subcat."','".$bookingid."')";
+				if($con->query($insQry))
+				{
+					?>
+                    <script>
+					alert("Cloth Added")
+					</script>
+                    <?php
+				}
+				else{
+					?>
+                    <script>
+					alert("Failed")
+					</script>
+                    <?php
+				}
+			}
+			else{
+				$discountamount=$dataChek['existing_count']*$dataSubcat['subcategory_price'];
+				$discountsum= $discountamount - ( $discountamount*$discount);
+				$remainingcount=$cloth-$dataChek['existing_count'];
+				$remainingamount=$remainingcount*$dataSubcat['subcategory_price'];
+				$totalsum=$remainingamount+$discountsum;
+				$insQry="insert into tbl_cloth(cloth_quantity,cloth_amount,subcategory_id,booking_id) values('".$cloth."','".$totalsum."','".$subcat."','".$bookingid."')";
+				if($con->query($insQry))
+				{
+					?>
+                    <script>
+					alert("Cloth Added")
+					</script>
+                    <?php
+				}
+				else{
+					?>
+                    <script>
+					alert("Failed")
+					</script>
+                    <?php
+				}
+			}
+		}
+	}
+	else{
+		$insBooking="insert into tbl_booking (user_id, booking_date) values(".$_SESSION['uid'].", ".$dataChek['packagebooking_id'].",curdate())" ;
+		if($con->query($insBooking))
+		{
+			$selBooking="select max(booking_id) as id from tbl_booking where user_id=".$_SESSION['uid'];
+			$resBooking=query($selBooking);
+			$dataBooking=$resBooking->fetch_assoc();
+			$bookingid=$dataBooking['booking_id'];
+	}
+	
+}
+}
+
+
+?>
+
+
+
+
+
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+</head>
+
+<body>
+<form id="form1" name="form1" method="post" action="">
+  <table width="400" height="217" border="1">
+   <tr>
+      <td>Category</td>
+      <td width="247"><label for="sl_category"></label>
+      <select name="sl_category" id="sl_category" onChange="getsubcategory(this.value)">
+      <option>--Select--</option>
+      		<?php
+            					$selqry = "select * from tbl_category";
+								$result = $con->query($selqry);
+								while($data = $result->fetch_assoc())
+									{
+			?>
+           						<option value="<?php echo $data["category_id"];?>">
+								<?php echo $data["category_name"];?></option>
+                                
+                                <?php
+								
+									}
+							    ?>
+      </select></td>
+      </td>
+    </tr>
+    <tr>
+      <td>Sub Category</td>
+     <td width="247"><label for="sl_subcategory"></label>
+      <select name="sl_subcategory" id="sl_subcategory">
+      <option>--Select--</option>
+      </select></td>
+    </tr>
+	<tr>
+      <td>Type</td>
+     <td width="247"><label for="sl_type"></label>
+      <select name="sl_type" id="sl_type">
+      <option>--Select--</option>
+	  <?php
+            					$selqryT = "select * from tbl_type";
+								$resultT = $con->query($selqryT);
+								while($dataT = $resultT->fetch_assoc())
+									{
+			?>
+           						<option value="<?php echo $dataT["type_id"];?>">
+								<?php echo $dataT["type_name"];?></option>
+                                
+                                <?php
+								
+									}
+							    ?>
+      </select></td>
+    </tr>
+    <tr>
+      <td>Cloth Quantity</td>
+      <td><label for="txt_clothcount"></label>
+      <input type="text" name="txt_clothcount" id="txt_clothcount" /></td>
+    </tr>
+   
+    <tr>
+      <td colspan="2" align="center"> <input type="submit" name="btn_confirm" id="btn_confirm" value="Confirm" />
+      <input type="submit" name="btn_reset" id="btn_reset" value="Reset" /></td>
+      
+    </tr>
+  </table>
+</form>
+</body>
+<script src="../Assets/JQuery/jQuery.js"></script>
+<script>
+function getsubcategory(pid)
+{
+	$.ajax({
+		url: "../Assets/AjaxPages/AjaxSubCat.php?pid=" + pid,
+		success: function(a) {
+		
+			$("#sl_subcategory").html(a);
+
+		}
+	});
+}</script>
+<?php
+include('Foot.php');
+ob_flush();
+?>
+</html>
