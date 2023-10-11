@@ -6,33 +6,33 @@ if(isset($_GET['bid'])){
     if($con->query($updQry)){
         ?>
         <script>
-            alert('Booking Cancelled')
-            window.location="MyBooking.php"
+            alert('Updated')
+            window.location="Bookings.php"
             </script>
             <?php
     }
 }
 ?>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>My Booking</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
 </head>
 <body>
 <table cellpadding="10" border='1'>
     <tr>
         <td>Sl.No</td>
-        <td>Branch</td>
+        <td>User</td>
         <td>Contact</td>
         <td>Cloth Count</td>
-        <td>Total Amount</td>
         <td>Status</td>
         <td>Action</td>
     </tr>
     <?php
-    $selQry="select * from tbl_booking b inner join tbl_branch br on br.branch_id=b.branch_id where b.user_id=".$_SESSION['uid'];
+    $selQry="select * from tbl_booking b inner join tbl_user u on u.user_id=b.user_id where b.branch_id=".$_SESSION['bid'];
     $res=$con->query($selQry);
     $i=0;
     while($data=$res->fetch_assoc()){
@@ -40,8 +40,8 @@ if(isset($_GET['bid'])){
         ?>
         <tr>
         <td><?php echo $i ?></td>
-        <td><?php echo $data['branch_name'] ?></td>
-        <td><?php echo $data['branch_contact'] ?></td>
+        <td><?php echo $data['user_name'] ?></td>
+        <td><?php echo $data['user_contact'] ?></td>
         <td>
             <?php
                 $selCloth="select sum(cloth_quantity) as cloth from tbl_cloth where booking_id=".$data['booking_id'];
@@ -50,11 +50,10 @@ if(isset($_GET['bid'])){
                 echo $dataCloth['cloth'];
             ?>
         </td>
-        <td><?php echo $data['booking_amount'] ?></td>
         <td>
             <?php
             if($data['booking_status']==0){
-                echo "Request Send. Waiting for Shop response";
+                echo "New Request";
             }
             else if($data['booking_status']==1){
                 echo "Request Accepted";
@@ -66,7 +65,7 @@ if(isset($_GET['bid'])){
                 echo "Cloth Picked Up";
             }
             else if($data['booking_status']==4){
-                echo "Washing Finished.<br>Complete Payment: Rs.".$data['booking_amount'];
+                echo "Washing Finished";
             }
             else if($data['booking_status']==5){
                 echo "Payment Completed";
@@ -75,35 +74,39 @@ if(isset($_GET['bid'])){
                 echo "Cloths Returned";
             }
             else if($data['booking_status']==7){
-                echo "Cancelled";
+                echo "Request Cancelled by User";
             }
             ?>
-            </td>
+        </td>
         <td>
-            <?php
-            if($data['booking_status']<=1){
+        <?php
+            if($data['booking_status']==0){
                 ?>
-                <a href="MyBooking.php?bid=<?php echo $data['booking_id'] ?>&st=7">Cancel</a><br>
+                <a href="Bookings.php?bid=<?php echo $data['booking_id'] ?>&st=1">Accept</a><br>
+                <a href="Bookings.php?bid=<?php echo $data['booking_id'] ?>&st=2">Reject</a>
                 <?php
             }
-            else if($data['booking_status']==4){
+            else if($data['booking_status']==1){
                 ?>
-                <a href="Payment.php?bid=<?php echo $data['booking_id'] ?>">Payment</a><br>
+                <a href="Bookings.php?bid=<?php echo $data['booking_id'] ?>&st=3">Cloth Picked Up</a><br>
                 <?php
             }
-            else if($data['booking_status']==6){
+            else if($data['booking_status']==3){
                 ?>
-                <a href="Review.php?bid=<?php echo $data['booking_id'] ?>">Review</a><br>
+                <a href="Bookings.php?bid=<?php echo $data['booking_id'] ?>&st=4">Washing Finished</a><br>
+                <?php
+            }
+            else if($data['booking_status']==5){
+                ?>
+                <a href="Bookings.php?bid=<?php echo $data['booking_id'] ?>&st=6">Cloth Returned</a><br>
                 <?php
             }
             ?>
-                <a href="ViewCloth.php?bid=<?php echo $data['booking_id'] ?>">Show Cloths</a><br>
         </td>
     </tr>
     <?php
     }
     ?>
-</table>
-
+</table> 
 </body>
 </html>

@@ -4,7 +4,7 @@ include("../Assets/Connection/Connection.php");
 session_start();
 ob_start();
 include('Head.php');
-$selqry="select * from tbl_packagebooking u inner join tbl_package p on u.package_id=p.package_id where user_id='$_SESSION[uid]' and packagebooking_status=1 and existing_count!=0 order by packagebooking_id desc";
+$selqry="select * from tbl_packagebooking u inner join tbl_package p on u.package_id=p.package_id where user_id='$_SESSION[uid]' and packagebooking_status=1 order by packagebooking_id desc";
 $result=$con->query($selqry);
 ?>
 

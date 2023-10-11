@@ -11,10 +11,10 @@ if (isset($_POST['btn_save'])) {
 
 $booking_amount = $_POST['total_amount'];
 $user_id = $_SESSION["uid"];
-$packagebooking_id = '0';
+$branch_id = $_GET['bid'];
 
     $insert_booking_query = "INSERT INTO `tbl_booking` (`booking_date`, `booking_amount`, `user_id`, `packagebooking_id`) 
-VALUES (curdate(), '$booking_amount', '$user_id', '$packagebooking_id')";
+VALUES (curdate(), '$booking_amount', '$user_id', '$branch_id')";
 
 if ($con->query($insert_booking_query) === TRUE) {
     $last_booking_id = $con->insert_id;
@@ -42,6 +42,7 @@ if ($con->query($insert_booking_query) === TRUE) {
                 echo "Error: " . $con->error;
             }
         }
+        header('location:MyBooking.php');
     }
     else {
         echo "Error inserting data into tbl_booking: " . $con->error;

@@ -13,6 +13,9 @@ if (isset($_POST['btnlogin'])) {
 
     $selUser = "select * from tbl_user where user_email='$email' and user_password='$password'";
     $resUser = $con->query($selUser);
+
+    $selbranch = "select * from tbl_branch where branch_email='$email' and branch_password='$password'";
+    $resbranch = $con->query($selbranch);
     if ($resAdmin->num_rows > 0) {
         $row = $resAdmin->fetch_assoc();
         $_SESSION['aid'] = $row['admin_id'];
@@ -23,6 +26,11 @@ if (isset($_POST['btnlogin'])) {
         $_SESSION['uid'] = $row['user_id'];
         $_SESSION['uname'] = $row['user_name'];
         header("location: ../User/HomePage.php");
+     }else if ($resbranch->num_rows > 0) {
+        $row = $resbranch->fetch_assoc();
+        $_SESSION['bid'] = $row['branch_id'];
+        $_SESSION['bname'] = $row['branch_name'];
+        header("location: ../branch/HomePage.php");
      }else {
         echo '<script>alert("Invalid Credentials");</script>';
     }

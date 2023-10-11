@@ -151,6 +151,7 @@ include("../assets/connection/connection.php");
         $up ="update tbl_packagebooking set packagebooking_status='1' where packagebooking_id='".$data["latest_id"]."'";
         if($con->query($up))
         {
+            $_SESSION['type']="";
 ?>
 <script>
 window.location="Success.html";
@@ -158,6 +159,16 @@ window.location="Success.html";
 <?php        }
 		
 			}
+            else{
+                $updQry="update tbl_booking set booking_status=5 where booking_id=".$_GET['bid'];
+                if($con->query($updQry))
+        {
+?>
+<script>
+window.location="Success.html";
+</script>
+<?php        }
+            }
 		
     }
 	?>
