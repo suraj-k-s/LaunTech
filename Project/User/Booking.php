@@ -13,7 +13,7 @@ $booking_amount = $_POST['total_amount'];
 $user_id = $_SESSION["uid"];
 $branch_id = $_GET['bid'];
 
-    $insert_booking_query = "INSERT INTO `tbl_booking` (`booking_date`, `booking_amount`, `user_id`, `packagebooking_id`) 
+    $insert_booking_query = "INSERT INTO `tbl_booking` (`booking_date`, `booking_amount`, `user_id`, `branch_id`) 
 VALUES (curdate(), '$booking_amount', '$user_id', '$branch_id')";
 
 if ($con->query($insert_booking_query) === TRUE) {
