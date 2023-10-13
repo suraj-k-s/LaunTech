@@ -49,7 +49,15 @@ if ($con->query($insert_booking_query) === TRUE) {
     }
 }
 
-
+$selCheck="select * from tbl_packagebooking pb inner join tbl_package p on p.package_id=pb.package_id where pb.packagebooking_status=1 and user_id=".$_SESSION['uid']." and curdate() between pb.packagebooking_date and DATE_ADD(STR_TO_DATE(pb.packagebooking_date, '%Y-%m-%d'), INTERVAL p.package_duration DAY)";
+$resCheck=$con->query($selCheck);
+if($dataCheck=$resCheck->fetch_assoc())
+{
+    $discountPerc=$dataCheck['package_percentage'];
+}
+else{
+    $discountPerc=0;
+}
 ?>
 
 
@@ -125,6 +133,7 @@ if ($con->query($insert_booking_query) === TRUE) {
                     <td><button type="button" class="delete-row">Delete</button></td>
                 </tr>
                 <tr class="amount-row">
+                <input type="hidden" name="discount" id="discount" value="<?php echo $discountPerc ?>">
                 <input type="hidden" name="total_amount" id="total-amount-input" value="0">
                     <td colspan="8" align="right" id="total-amount">
                         Total Amount : 0
@@ -144,14 +153,17 @@ if ($con->query($insert_booking_query) === TRUE) {
             var amountText = $(selectElement).closest('.data-row').find('.sel-amount');
             var calculatedAmount = selectedValue * subcategoryPrice;
             amountText.val(calculatedAmount);
-
+            var disc=document.getElementById('discount').value
             // Calculate the total amount for all rows
             var totalAmount = 0;
             $('.sel-amount').each(function () {
                 var amount = parseFloat($(this).val()) || 0;
                 totalAmount += amount;
             });
-
+            if(disc!=0){
+                totalAmount-=(totalAmount*(disc/100))
+            }
+            console.log(totalAmount);
             // Update the "Total Amount" <td> with the calculated total amount
             $('#total-amount').text('Total Amount : ' + totalAmount);
             $('#total-amount-input').val(totalAmount);

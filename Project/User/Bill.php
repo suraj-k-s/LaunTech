@@ -1,9 +1,18 @@
 <?php
-include("../Assets/Connection/Connection.php"); 
-$selqry="select * from tbl_cart c inner join tbl_booking b on b.booking_id=c.booking_id inner join tbl_user u on u.user_id=b.user_id inner join tbl_product p on p.product_id=c.product_id inner join tbl_kudumbashree k on k.kudumbashree_id=p.kudumbashree_id where c.cart_id='".$_GET["id"]."'";
-$result=$Conn->query($selqry);
+include("../Assets/Connection/Connection.php");
+session_start();
+$selqry="select * from tbl_booking b inner join tbl_user u on u.user_id=b.user_id inner join tbl_branch br on br.branch_id=b.branch_id where booking_id=".$_GET['bid'];
+$result=$con->query($selqry);
 $data=$result->fetch_assoc();
-
+$selCheck="select * from tbl_packagebooking pb inner join tbl_package p on p.package_id=pb.package_id where pb.packagebooking_status=1 and user_id=".$_SESSION['uid']." and curdate() between pb.packagebooking_date and DATE_ADD(STR_TO_DATE(pb.packagebooking_date, '%Y-%m-%d'), INTERVAL p.package_duration DAY)";
+$resCheck=$con->query($selCheck);
+if($dataCheck=$resCheck->fetch_assoc())
+{
+    $discountPerc=$dataCheck['package_percentage'];
+}
+else{
+    $discountPerc=0;
+}
 ?>
 
 <!DOCTYPE html>
@@ -100,7 +109,7 @@ $data=$result->fetch_assoc();
     </style>
   </head>
   <body>
- <br /><br /><br /><br /><br /><br />
+ <br />
   <button id="cmd" onClick="printDiv('content')" style="float:right;color:#FFF;background:#0C0;border:none;margin:20px;padding:10px;border-radius:10px" >Download Bill</button>
     <section class="main-pd-wrapper" style="width: 1000px; margin: auto" id="content">
       <div style="display: table-header-group">
@@ -123,7 +132,7 @@ $data=$result->fetch_assoc();
                 "
               >
               	<span
-                style="color:#F93;font-size:56px">Luckys Mart</span>
+                style="color:#F93;font-size:56px">LaunTech</span>
 
                 <p style="font-weight: bold; margin-top: 15px">
                   GST TIN : 06AAFCD6498P1ZT
@@ -150,6 +159,7 @@ $data=$result->fetch_assoc();
                   Bill to/ Ship to
                 </h4>
                 <p style="font-size: 14px">
+                  <?php echo $data["user_name"] ?><br>
                   <?php echo $data["user_address"] ?>
                   <br />
                   Tel:<?php echo $data["user_contact"] ?>
@@ -180,14 +190,14 @@ $data=$result->fetch_assoc();
             <td colspan="3" style="width: 300px">
               <h4 style="margin: 0">Sold By:</h4>
               <p>
-                <?php echo $data["kudumbashree_address"] ?>
+                <?php echo $data["branch_name"] ?>
               </p>
             </td>
           </tr>
 
           <tr>
-            <th style="width: 50px">#</th>
-            <th style="width: 150px">Product</th>
+            <th style="width: 50px">Sl.No</th>
+            <th style="width: 150px">Cloth</th>
             <th style="width: 100px">Photo</th>
             <th style="width: 150px">Price</th>
             <th style="width: 80px">Qty</th>
@@ -195,14 +205,26 @@ $data=$result->fetch_assoc();
           </tr>
         </thead>
         <tbody>
+          <?php
+          $selCloth="SELECT * from tbl_cloth c inner join tbl_subcategory s on s.subcategory_id=c.subcategory_id inner join tbl_category ct on ct.category_id=s.category_id inner join tbl_type t on t.type_id=c.type_id where c.booking_id=".$data['booking_id'];
+          $resCloth=$con->query($selCloth);
+          $sumTotal=0;
+          $i=0;
+          while($dataCloth=$resCloth->fetch_assoc()){
+            $i++;
+          ?>
           <tr>
-            <td>01</td>
-            <td><?php echo $data["product_name"] ?></td>
-            <td><img src="../Assets/Files/Photo/<?php echo $data["product_photo"];?>" width="119" height="92" /></td>
-            <td><?php echo $data["product_price"] ?></td>
-            <td><?php echo $data["cart_quantity"] ?></td>
-            <td><?php echo $data["product_price"] * $data["cart_quantity"] ?></td>
+            <td><?php echo $i ?></td>
+            <td><?php echo $dataCloth["subcategory_name"]."/".$dataCloth["category_name"]."/".$dataCloth["type_name"] ?></td>
+            <td><img src="../Assets/Files/Cloth/<?php echo $dataCloth["cloth_images"];?>" width="119" height="92" /></td>
+            <td><?php echo $dataCloth["subcategory_price"] ?></td>
+            <td><?php echo $dataCloth["cloth_quantity"] ?></td>
+            <td><?php echo $dataCloth["subcategory_price"] * $dataCloth["cloth_quantity"] ?></td>
           </tr>
+          <?php
+          $sumTotal+=($dataCloth["subcategory_price"] * $dataCloth["cloth_quantity"]);
+          }
+          ?>
         </tbody>
         <tfoot></tfoot>
       </table>
@@ -211,9 +233,23 @@ $data=$result->fetch_assoc();
       <table class="hm-p table-bordered" style="width: 100%; margin-top: 30px">
         
         <tr style="background: #fcbd02">
-          <th>Total Order Value</th>
+          <th>Sub Total</th>
           <td style="width: 70px; text-align: right; border-right: none">
-            <b><?php echo $data["product_price"] * $data["cart_quantity"] ?></b>
+            <b><?php echo $sumTotal  ?></b>
+          </td>
+          <td colspan="5" style="border-left: none"></td>
+        </tr>
+        <tr style="background: #fcbd02">
+          <th>Discount</th>
+          <td style="width: 70px; text-align: right; border-right: none">
+            <b><?php echo $discountPerc  ?></b>
+          </td>
+          <td colspan="5" style="border-left: none"></td>
+        </tr>
+        <tr style="background: #fcbd02">
+          <th>Total</th>
+          <td style="width: 70px; text-align: right; border-right: none">
+            <b><?php echo $sumTotal-$discountPerc  ?></b>
           </td>
           <td colspan="5" style="border-left: none"></td>
         </tr>

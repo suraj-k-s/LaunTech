@@ -96,6 +96,11 @@ if(isset($_GET['bid'])){
                 <a href="Review.php?bid=<?php echo $data['booking_id'] ?>">Review</a><br>
                 <?php
             }
+            if($data['booking_status']>=4){
+                ?>
+                <a href='bill.php?bid=<?php echo $data['booking_id'] ?>' target='_blank'>View Bill</a>
+                <?php
+            }
             ?>
                 <a href="ViewCloth.php?bid=<?php echo $data['booking_id'] ?>">Show Cloths</a><br>
         </td>
