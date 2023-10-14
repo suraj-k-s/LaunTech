@@ -40,35 +40,43 @@
 <title>LuanTech::Branch::ChangePassword</title>
 </head>
 <body>
-<form action="" method="post" >
-  <table width="500" border="1" height="181">
-  
-      <tr>
-      <td width="201" height="41">Old Password</td>
-      <td width="283"><label for="txtoldpwd"></label>
-     <input type="password" name="txtoldpwd" id="txtoldpwd" title="You must be enter 6 or more charaters" required  pattern="[a-zA-Z0-9.@#$%^&*]{6,30}"/></td>
-    </tr>
-    
-    <tr>
-      <td height="47">New password</td>
-      <td><label for="txtnewpwd"></label>
-     <input type="password" name="txtnewpwd" id="txtnewpwd" title="You must be enter 6 or more charaters" required  pattern="[a-zA-Z0-9.@#$%^&*]{6,30}"/></td>
-    </tr>
-    
-        <tr>
-      <td height="47">Confirm password</td>
-      <td><label for="txtnewpwd"></label>
-     <input type="password" name="txtconfirmpwd" id="txtconfirmpwd" title="You must be enter 6 or more charaters" required  pattern="[a-zA-Z0-9.@#$%^&*]{6,30}"/></td>
-    </tr>
-    
-   
-    <tr>
-      <td colspan="2" align="center"><input type="submit" name="btn_submit" id="btn_submit" value="Submit" />
-     <input type="reset" name="btn_cancel" id="btn_cancel" value="Cancel"/>
-      </td>
-    </tr>
-  </table>
-</form>
+<div class="container">
+    <form action="" method="post" class="needs-validation" novalidate>
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <table class="table table-bordered">
+                    <tr>
+                        <td width="201" height="41">Old Password</td>
+                        <td width="283">
+                            <input type="password" name="txtoldpwd" id="txtoldpwd" class="form-control" required
+                                   pattern="[a-zA-Z0-9.@#$%^&*]{6,30}" title="You must enter 6 or more characters"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td height="47">New password</td>
+                        <td>
+                            <input type="password" name="txtnewpwd" id="txtnewpwd" class="form-control" required
+                                   pattern="[a-zA-Z0-9.@#$%^&*]{6,30}" title="You must enter 6 or more characters"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td height="47">Confirm password</td>
+                        <td>
+                            <input type="password" name="txtconfirmpwd" id="txtconfirmpwd" class="form-control" required
+                                   pattern="[a-zA-Z0-9.@#$%^&*]{6,30}" title="You must enter 6 or more characters"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" align="center">
+                            <input type="submit" name="btn_submit" id="btn_submit" value="Submit" class="btn btn-primary"/>
+                            <input type="reset" name="btn_cancel" id="btn_cancel" value="Cancel" class="btn btn-secondary"/>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </form>
+</div>
 </body>
 <?php
 include('Foot.php');

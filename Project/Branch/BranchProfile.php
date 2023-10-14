@@ -26,37 +26,45 @@ $data=$result->fetch_assoc();
 <title>LaunTech::Branch::MyProfile</title>
 </head>
 <body>
-<form id="form1" name="form1" method="post" action="">
-  <table width="382" border="1">
-    <tr>
-      <td colspan="2" align="center"><img src="../Assets/Files/Branch/<?php echo $data['branch_photo'];?>" height="200" width="200"</td>
-    </tr>
-    <tr>
-      <td width="137">Name</td>
-      <td width="229"><?php echo $data["branch_name"];?></td>
-    </tr>
-    <tr>
-      <td>Contact</td>
-      <td><?php echo $data["branch_contact"];?></td>
-    </tr>
-    <tr>
-      <td>Email</td>
-      <td><?php echo $data["branch_email"];?></td>
-    </tr>
-     <tr>
-      <td>Branch Address</td>
-      <td><?php echo $data['branch_address']; ?></td>
-    </tr>
-     <tr>
-      <td>Place</td>
-      <td><?php echo $data['place_name']; ?></td>
-    </tr>
-    <tr>
-      <td>District</td>
-      <td><?php echo $data['district_name']; ?></td>
-    </tr>
-  </table>
-</form>
+<div class="container">
+    <form id="form1" name="form1" method="post" action="">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <table class="table table-bordered">
+                    <tr>
+                        <td colspan="2" align="center">
+                            <img src="../Assets/Files/Branch/<?php echo $data['branch_photo']; ?>" class="img-fluid" alt="Branch Photo">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="137">Name</td>
+                        <td><?php echo $data["branch_name"]; ?></td>
+                    </tr>
+                    <tr>
+                        <td>Contact</td>
+                        <td><?php echo $data["branch_contact"]; ?></td>
+                    </tr>
+                    <tr>
+                        <td>Email</td>
+                        <td><?php echo $data["branch_email"]; ?></td>
+                    </tr>
+                    <tr>
+                        <td>Branch Address</td>
+                        <td><?php echo $data['branch_address']; ?></td>
+                    </tr>
+                    <tr>
+                        <td>Place</td>
+                        <td><?php echo $data['place_name']; ?></td>
+                    </tr>
+                    <tr>
+                        <td>District</td>
+                        <td><?php echo $data['district_name']; ?></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </form>
+</div>
 </body>
 <?php
 include('Foot.php');

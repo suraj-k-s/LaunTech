@@ -47,35 +47,39 @@ if(isset($_POST['btn_submit']))
 <title>LuanTech::Branch::BranchProfile</title>
 </head>
 <body>
-<form id="form1" name="form1" method="post" action="">
-  <table width="382" border="1">
-    <tr>
-      <td colspan="2" align="center">
-      	<img src="../Assets/Files/Branch/<?php echo $data['branch_photo'];?>" height="200" width="200"</td>
-    </tr>
-    <tr>
-      <td width="137">Name</td>
-      <td width="229">
-	  <input type="text" name="txtname" value="<?php echo $data["branch_name"];?>" />
-	  
-	  
-      
-      </td>
-    </tr>
-    
-    <tr>
-      <td>Contact</td>
-      <td>
-	    <input type="text" name="txtcontact" value="<?php echo $data["branch_contact"];?>" />
-	  </td>
-    </tr>
-    <tr>
-      <td colspan="2" align="center"><input type="submit" name="btn_submit" id="btn_submit" value="Update" />
-     <input type="reset" name="btn_cancel" id="btn_cancel" value="Cancel"/>
-      </td>
-    </tr>
-  </table>
-</form>
+<div class="container">
+    <form id="form1" name="form1" method="post" action="">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <table class="table table-bordered">
+                    <tr>
+                        <td colspan="2" align="center">
+                            <img src="../Assets/Files/Branch/<?php echo $data['branch_photo']; ?>" class="img-fluid" alt="Branch Photo" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="137">Name</td>
+                        <td width="229">
+                            <input type="text" name="txtname" class="form-control" value="<?php echo $data["branch_name"]; ?>" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Contact</td>
+                        <td>
+                            <input type="text" name="txtcontact" class="form-control" value="<?php echo $data["branch_contact"]; ?>" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" align="center">
+                            <input type="submit" name="btn_submit" id="btn_submit" value="Update" class="btn btn-primary" />
+                            <input type="reset" name="btn_cancel" id="btn_cancel" value="Cancel" class="btn btn-secondary" />
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </form>
+</div>
 </body>
 <?php
 include('Foot.php');

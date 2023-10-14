@@ -11,8 +11,7 @@ if(isset($_GET['pid']))
 	values('".$_GET['pid']."',curdate(),'".$_SESSION['uid']."')";
 	if($con->query($insqry))
 	{
-		$_SESSION['type']='pkgsub';
-		header('location: Payment.php');
+		header('location: Payment.php?action=package');
 	}
 	else{
 		?>
