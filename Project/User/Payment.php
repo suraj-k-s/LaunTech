@@ -152,7 +152,7 @@ require 'phpMail/src/SMTP.php';
 <?php
     if(isset($_POST["btnpay"]))
     {
-		if(isset($_GET['package'])){
+		if(isset($_GET['action'])){
 			$selqry="select max(packagebooking_id) as latest_id from tbl_packagebooking where user_id='".$_SESSION["uid"]."' ";
 		$result=$con->query($selqry);
 		$data=$result->fetch_assoc();
@@ -177,7 +177,7 @@ window.location="Success.html";
                     $selqry="select * from tbl_booking b inner join tbl_user u on u.user_id=b.user_id inner join tbl_branch br on br.branch_id=b.branch_id where booking_id=".$_GET['bid'];
 $result=$con->query($selqry);
 $data=$result->fetch_assoc();
-$selCheck="select * from tbl_packagebooking pb inner join tbl_package p on p.package_id=pb.package_id where pb.packagebooking_status=1 and user_id=".$_SESSION['uid']." and curdate() between pb.packagebooking_date and DATE_ADD(STR_TO_DATE(pb.packagebooking_date, '%Y-%m-%d'), INTERVAL p.package_duration DAY)";
+$selCheck="select * from tbl_packagebooking pb inner join tbl_package p on p.package_id=pb.package_id where pb.packagebooking_status=1 and user_id=".$_SESSION['uid']." and curdate() between pb.packagebooking_date and DATE_ADD(STR_TO_DATE(pb.packagebooking_date, '%Y-%m-%d'), INTERVAL p.package_duration DAY) order by packagebooking_date desc";
 $resCheck=$con->query($selCheck);
 if($dataCheck=$resCheck->fetch_assoc())
 {
@@ -463,7 +463,7 @@ else{
             }
 ?>
 <script>
-//window.location="Success.html";
+window.location="Success.html";
 </script>
 <?php        }
             }

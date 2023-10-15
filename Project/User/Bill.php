@@ -216,7 +216,19 @@ else{
           <tr>
             <td><?php echo $i ?></td>
             <td><?php echo $dataCloth["subcategory_name"]."/".$dataCloth["category_name"]."/".$dataCloth["type_name"] ?></td>
-            <td><img src="../Assets/Files/Cloth/<?php echo $dataCloth["cloth_images"];?>" width="119" height="92" /></td>
+            <td><?php
+            if($dataCloth['cloth_images']==""){
+              ?>
+              <img src="../Assets/Templates/Main/img/dummy.png" width="119" height="92" />
+              <?php
+            }
+            else{
+              ?>
+            <img src="../Assets/Files/Cloth/<?php echo $dataCloth["cloth_images"];?>" width="119" height="92" />
+          <?php
+            }
+            ?>
+            </td>
             <td><?php echo $dataCloth["subcategory_price"] ?></td>
             <td><?php echo $dataCloth["cloth_quantity"] ?></td>
             <td><?php echo $dataCloth["subcategory_price"] * $dataCloth["cloth_quantity"] ?></td>
